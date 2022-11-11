@@ -1,4 +1,4 @@
-import Avatar from "./Avatar";
+import Avatar from "./Avatar/Avatar.js";
 import "./Header.css";
 function Header() {
   return (
