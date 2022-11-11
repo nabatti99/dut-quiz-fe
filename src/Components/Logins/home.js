@@ -1,7 +1,6 @@
 import "./home.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./login";
-import SignUp from "./signUp";
 
 function Home() {
   return (
@@ -18,7 +17,6 @@ function Home() {
           <Route path="/">
             <Route index element={<Login />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signUp" element={<SignUp />} />
           </Route>
         </Routes>
       </div>
