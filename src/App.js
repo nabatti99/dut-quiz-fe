@@ -1,6 +1,6 @@
 import Header from "./Components/Header";
-import Menu from "./Components/Avatar/Menu";
-import Avatar from "./Components/Avatar/Avatar";
+// import Menu from "./Components/Avatar/Menu";
+// import Avatar from "./Components/Avatar/Avatar";
 
 function App() {
   return (
