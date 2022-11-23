@@ -1,11 +1,9 @@
-import Header from "./Components/Header";
-// import Menu from "./Components/Avatar/Menu";
-// import Avatar from "./Components/Avatar/Avatar";
+import ExamList from "./Pages/ExamList";
 
 function App() {
   return (
     <div>
-      <Header />
+      <ExamList />
     </div>
   );
 }
