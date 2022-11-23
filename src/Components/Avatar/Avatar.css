@@ -109,11 +109,14 @@ Menu .MenuProfile {
   height: 50px;
   align-items: center;
   margin-bottom: 10px;
-  transition: 0.5s;
+  transition: 0.2s;
+  cursor: pointer;
 }
 .menuItems:hover {
-  background-color: #dffce7;
-  transition: 0.5s;
+  background-color: #f7fde1;
+  transition: 0.2s;
+  cursor: pointer;
+  border: solid 1px #2e4858;
 }
 .menuItems .icon {
   width: 30px;
