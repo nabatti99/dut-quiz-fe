@@ -34,6 +34,7 @@
   height: 70px;
   background-image: url(/public/LOGOCNTT.png);
   background-size: contain;
+  background-repeat: no-repeat;
   border-radius: 20%;
   margin-left: 5vw;
 }

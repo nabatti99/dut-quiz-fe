@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.multipleChoiceQuiz,
+.singleChoiceQuiz {
+  width: 80%;
+  height: fit-content;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.45);
+  border: 1px solid #707070;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.theQuestion,
+.theQuestion.done {
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+.theAnswers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin-left: 20px;
+  width: 90%;
+}
+.answer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+  height: fit-content;
+}
+
+.tickButton {
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border: 1px solid#707070;
+  cursor: pointer;
+}
+
+.answer.selected .tickButton {
+  background-color: #65996e;
+}
+
+.multipleChoiceQuiz .tickButton {
+  border-radius: 2px;
+}
+.singleChoiceQuiz .tickButton {
+  border-radius: 50%;
+}
