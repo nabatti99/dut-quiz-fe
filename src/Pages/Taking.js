@@ -2,6 +2,7 @@ import Header from "../Components/Header";
 import "./Taking.css";
 import Question from "../Components/TakingExam/Question";
 import RedButton from "../Components/Button/RedButton";
+import QuizNode from "../Components/TakingExam/QuizNode";
 
 function TakingExam(props) {
   const warningMessage = [
@@ -11,6 +12,8 @@ function TakingExam(props) {
     "- Nếu trong quá trình làm bài xảy ra sự cố về mạng. Hãy đăng nhập lại, hệ thống vẫn sự lưu trữ quá trình làm bài.",
   ];
   const set = props.set;
+  let countNode = 0;
+  let countQuest = 0;
   return (
     <div className="takingExam">
       <div className="contain">
@@ -19,7 +22,11 @@ function TakingExam(props) {
         </div>
         <div className="nottitle">
           <div className="testManaging">
-            <div className="questionInfor"></div>
+            <div className="questionNodes">
+              {set.map((question) => {
+                return <QuizNode src={question} index={++countNode} />;
+              })}
+            </div>
             <div className="warning">
               <p id="faultCount">Số lần vi phạm: </p>
               <div id="warningMessage">

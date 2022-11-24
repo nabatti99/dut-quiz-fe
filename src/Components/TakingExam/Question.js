@@ -5,15 +5,22 @@ function Question(props) {
 
   function checkDone() {
     let theQuestion = document.getElementById(src.id);
-    console.log(theQuestion);
     let _check = src.answers.some((ans, _index) =>
       document
         .getElementById(src.id + "." + _index)
         .classList.contains("selected")
     );
     theQuestion.classList.toggle("done", _check === true);
-  }
+    let node = document.getElementById("node" + src.id);
 
+    node.classList.toggle("done", theQuestion.classList.contains("done"));
+  }
+  // function checkStatus() {
+  //   let node = document.getElementById("node" + question.id);
+  //   let quest = document.getElementById(question.id);
+  //   console.log(node);
+  //   node.classList.toggle("done", quest.classList.contains("done"));
+  // }
   switch (src.type) {
     case "multiple":
       return (
