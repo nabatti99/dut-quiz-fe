@@ -50,7 +50,7 @@ function TakingExam(props) {
             </div>
             <div className="testField">
               {set.map((question) => {
-                return <Question src={question} />;
+                return <Question src={question} index={++countQuest} />;
               })}
               <RedButton value="Nộp bài" />
             </div>

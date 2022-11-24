@@ -68,8 +68,7 @@
   right: 20px;
   height: 50%;
   display: flex;
-  gap: 20px;
-  /* background-color: blanchedalmond; */
+  background-color: blanchedalmond;
 }
 .nottitle .testManaging .warning {
   position: absolute;
