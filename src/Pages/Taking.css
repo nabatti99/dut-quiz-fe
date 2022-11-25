@@ -6,7 +6,7 @@
 
 .takingExam {
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
 }
@@ -29,7 +29,7 @@
 }
 .takingExam .contain .nottitle {
   width: 100%;
-  height: 90%;
+  height: 80%;
   display: flex;
 }
 .nottitle .testContain {
@@ -37,8 +37,9 @@
   margin-right: 20px;
 }
 .testContain .infor {
-  width: 100%;
+  width: 90%;
   height: 50px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -74,7 +75,7 @@
 }
 
 .nottitle .testManaging .questionNodes::-webkit-scrollbar {
-  width: 0;
+  width: 1;
 }
 
 .nottitle .testManaging .warning {
@@ -106,14 +107,15 @@
   border-radius: 15px;
 }
 .testContain .testField {
-  height: 95%;
-  width: 100%;
+  height: 80%;
+  width: fit-content;
   display: flex;
   padding: 20px;
   flex-direction: column;
   gap: 30px;
   align-items: center;
   overflow: auto;
+  border: 1px solid #f5ca96;
 }
 .testContain .testField::-webkit-scrollbar {
   width: 0;
