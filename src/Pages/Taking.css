@@ -69,7 +69,7 @@
   right: 20px;
   height: 50%;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   overflow: auto;
   gap: 10px;
 }
