@@ -7,7 +7,7 @@ import calendar from "./menuicon/calendar-outline.png";
 const menuItems = [
   {
     icon: listOutline,
-    title: "Danh sách liên kết",
+    title: "Danh sách bài thi",
   },
   {
     icon: result,

@@ -9,12 +9,14 @@
   color: #2e4858;
   width: 100vw;
   height: 90px;
-  margin-top: 10px;
+  box-sizing: border-box;
+  border: 10px solid #ecfeff;
   display: flex;
   justify-content: space-between;
   position: fixed;
+  background-color: #ecfeff;
 }
-.title {
+.header .title {
   /* font-family: SF-Pro-Display-Medium; */
   width: 60%;
   height: 60%;
@@ -32,6 +34,7 @@
   height: 70px;
   background-image: url(/public/LOGOCNTT.png);
   background-size: contain;
+  background-repeat: no-repeat;
   border-radius: 20%;
   margin-left: 5vw;
 }

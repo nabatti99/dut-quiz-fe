@@ -102,18 +102,19 @@ Menu .MenuProfile {
   display: flex;
   background-color: #ebfeff;
   border-radius: 50px;
-  box-shadow: 1px 36px 27px -26px rgba(74, 94, 94, 0.88);
-  -webkit-box-shadow: 1px 36px 27px -26px rgba(74, 94, 94, 0.88);
-  -moz-box-shadow: 1px 36px 27px -26px rgba(74, 94, 94, 0.88);
+
   width: 210px;
   height: 50px;
   align-items: center;
   margin-bottom: 10px;
-  transition: 0.5s;
+  transition: 0.2s;
+  cursor: pointer;
 }
 .menuItems:hover {
-  background-color: #dffce7;
-  transition: 0.5s;
+  background-color: #b7e1e3;
+  transition: 0.2s;
+  cursor: pointer;
+  box-shadow: 0px 2px #2e485850;
 }
 .menuItems .icon {
   width: 30px;
