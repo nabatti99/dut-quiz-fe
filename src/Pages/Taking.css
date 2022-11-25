@@ -67,9 +67,16 @@
   left: 20px;
   right: 20px;
   height: 50%;
-  display: flex;
-  background-color: blanchedalmond;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  overflow: auto;
+  gap: 10px;
 }
+
+.nottitle .testManaging .questionNodes::-webkit-scrollbar {
+  width: 0;
+}
+
 .nottitle .testManaging .warning {
   position: absolute;
   top: 55%;
