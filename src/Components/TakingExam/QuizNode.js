@@ -2,13 +2,18 @@ import "./QuizNode.css";
 
 function QuizNode(props) {
   const src = props.src;
+
   return (
-    <div className="quizNode" id={"node" + src.id}>
+    <button
+      className={"quizNode " + src.type}
+      id={"node" + src.id}
+      onClick={props.onClick}
+    >
       <div className="indexNode">
         <p>{props.index}</p>
       </div>
       <div className="status"></div>
-    </div>
+    </button>
   );
 }
 

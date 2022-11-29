@@ -50,11 +50,11 @@
 // ];
 
 let Questions = [];
-let n = 100;
+let n = 5;
 for (let i = 1; i <= n; i++) {
   const quest = {
     id: "id" + i,
-    type: i % 2 == 0 ? "single" : "multiple",
+    type: i % 2 === 0 ? "single" : "multiple",
     question:
       "Đây là câu hỏi số " +
       i +
@@ -66,19 +66,19 @@ for (let i = 1; i <= n; i++) {
     answers: [
       {
         state: false,
-        content: "Đây là đáp án 1 cua cau hoi so " + i,
+        content: "Đây là đáp án 1 của câu hỏi số " + i,
       },
       {
         state: true,
-        content: "Đây là đáp án 2 cua cau hoi so " + i,
+        content: "Đây là đáp án 2 của câu hỏi số " + i,
       },
       {
         state: false,
-        content: "Đây là đáp án 3 cua cau hoi so " + i,
+        content: "Đây là đáp án 3 của câu hỏi số " + i,
       },
       {
         state: false,
-        content: "Đây là đáp án 4 cua cau hoi so " + i,
+        content: "Đây là đáp án 4 của câu hỏi số " + i,
       },
     ],
   };
