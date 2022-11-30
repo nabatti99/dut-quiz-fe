@@ -1,22 +1,23 @@
 import "./Exams.css";
 
 function Exams(props) {
+  const exam = props.exam;
   return (
     <div className="exambox">
       <div className="up">
         <div className="left">
-          <span id="subject">{props.subject}</span>
+          <span id="subject">{exam.subject}</span>
         </div>
         <div className="right">
-          <span id="length">{props.length}</span>
-          <span id="time">{props.time}</span>
+          <span id="length">{exam.set.questions.length + " câu"}</span>
+          <span id="time">{exam.time + " phút"}</span>
         </div>
       </div>
       <div className="title">
-        <span id="title">{props.title}</span>
+        <span id="title">{exam.title}</span>
       </div>
       <div className="down">
-        <span id="date">{props.date}</span>
+        <span id="date">{exam.date}</span>
       </div>
     </div>
   );

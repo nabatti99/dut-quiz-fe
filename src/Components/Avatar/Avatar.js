@@ -20,7 +20,6 @@ function Avatar() {
       className={"profile" + (isOpen ? " active" : "")}
       onClick={() => {
         setIsOpen((prev) => !prev);
-        console.log(isOpen);
       }}
     >
       <div className="num1">

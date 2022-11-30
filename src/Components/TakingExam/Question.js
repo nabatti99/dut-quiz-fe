@@ -45,7 +45,7 @@ function Question(props) {
       return (
         <div className="multipleChoiceQuiz">
           <div className="theQuestion" id={src.id}>
-            <p>{"Câu " + props.index + ": " + src.question}</p>
+            <p>{"Câu " + props.index + ": " + src.title}</p>
           </div>
           <div className="theAnswers">
             {src.answers.map((ans, index) => {
@@ -67,7 +67,7 @@ function Question(props) {
       return (
         <div className="singleChoiceQuiz">
           <div className="theQuestion" id={src.id}>
-            <p>{"Câu " + props.index + ": " + src.question}</p>
+            <p>{"Câu " + props.index + ": " + src.title}</p>
           </div>
           <div className="theAnswers">
             {src.answers.map((ans, index) => {

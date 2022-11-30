@@ -1,11 +1,12 @@
-import Header from "../Components/Header";
 import "./Taking.css";
+import Header from "../Components/Header";
 import Question from "../Components/TakingExam/Question";
 import RedButton from "../Components/Button/RedButton";
 import GreenButton from "../Components/Button/GreenButton";
 import QuizNode from "../Components/TakingExam/QuizNode";
 import Timer from "../Components/TakingExam/Timer";
 import { useEffect, useState } from "react";
+import allExams from "../Test/test";
 
 function TakingExam(props) {
   const warningMessage = [
@@ -15,7 +16,9 @@ function TakingExam(props) {
     "- Nếu trong quá trình làm bài xảy ra sự cố về mạng. Hãy đăng nhập lại, hệ thống vẫn sự lưu trữ quá trình làm bài.",
     "- Có thể click vào ô câu hỏi bên trên để lướt nhanh đến câu hỏi muốn làm",
   ];
-  const set = props.set;
+  const exam = allExams.find((exam) => exam.id === props.examID);
+  console.log(exam);
+  const set = exam.set;
   let countNode = 0;
   let countQuest = 0;
   let countFault = 0;
@@ -24,7 +27,7 @@ function TakingExam(props) {
   useEffect(() => {
     setInterval(() => {
       let countDone = 0;
-      set.map((question) => {
+      set.questions.map((question) => {
         if (
           document
             .getElementById("node" + question.id)
@@ -40,12 +43,12 @@ function TakingExam(props) {
     <div className="takingExam">
       <div className="contain">
         <div className="title">
-          <span>{props.title}</span>
+          <span>{exam.title}</span>
         </div>
         <div className="nottitle">
           <div className="testManaging">
             <div className="questionNodes">
-              {set.map((question, index) => {
+              {set.questions.map((question, index) => {
                 return (
                   <QuizNode
                     src={question}
@@ -76,17 +79,17 @@ function TakingExam(props) {
           <div className="testContain">
             <div className="infor">
               <div id="timer">
-                <Timer time={props.time} />
+                <Timer time={exam.time} />
               </div>
               <div id="subject">
-                <p>{"Học phần: " + props.subject}</p>
+                <p>{"Học phần: " + exam.subject}</p>
               </div>
               <div id="time">
-                <p>{"Thời gian: " + props.time + " phút"}</p>
+                <p>{"Thời gian: " + exam.time + " phút"}</p>
               </div>
             </div>
             <div className="testField">
-              {set.map((question) => {
+              {set.questions.map((question) => {
                 return (
                   <Question
                     src={question}
