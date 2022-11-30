@@ -1,14 +1,17 @@
 import "./Avatar.css";
+import { Link } from "react-router-dom";
 
 function MenuItems(props) {
   return (
-    <div className="menuItems">
-      <div
-        className="icon"
-        style={{ backgroundImage: `url(${props.icon})` }}
-      ></div>
-      <div className="title">{props.title}</div>
-    </div>
+    <Link to={props.link}>
+      <div className="menuItems">
+        <div
+          className="icon"
+          style={{ backgroundImage: `url(${props.icon})` }}
+        ></div>
+        <div className="title">{props.title}</div>
+      </div>
+    </Link>
   );
 }
 export default MenuItems;

@@ -1,45 +1,17 @@
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import Exams from "../Components/Exam/Exams";
-import Header from "../Components/Header";
+import allExams from "../Test/test";
 import "./ExamList.css";
 
-function ExamList() {
-  const allExams = [
-    {
-      subject: "Ngôn ngữ lập trình",
-      length: "40 câu",
-      time: "90 phút",
-      title: "Bài thi giữa kỳ môn ngôn ngữ lập trình",
-      date: "9h00 ngày 22/10/2022",
-    },
-    {
-      subject: "Ngôn ngữ lập trình",
-      length: "60 câu",
-      time: "120 phút",
-      title: "Bài thi cuối kỳ môn ngôn ngữ lập trình",
-      date: "9h00 ngày 22/12/2022",
-    },
-    {
-      subject: "Ngôn ngữ lập trình",
-      length: "60 câu",
-      time: "120 phút",
-      title: "Bài thi cuối kỳ môn ngôn ngữ lập trình",
-      date: "9h00 ngày 22/12/2022",
-    },
-    {
-      subject: "Ngôn ngữ lập trình",
-      length: "60 câu",
-      time: "120 phút",
-      title: "Bài thi cuối kỳ môn ngôn ngữ lập trình",
-      date: "9h00 ngày 22/12/2022",
-    },
-    {
-      subject: "Ngôn ngữ lập trình",
-      length: "60 câu",
-      time: "120 phút",
-      title: "Bài thi cuối kỳ môn ngôn ngữ lập trình",
-      date: "9h00 ngày 22/12/2022",
-    },
-  ];
+function ExamList(props) {
+  let idRefs = useRef([]);
+  useEffect(() => {
+    idRefs.current.forEach((examid) => {
+      props.callback(examid);
+    });
+  });
+
   const recommendExams = [allExams[0], allExams[1]];
   return (
     <div className="examList">
@@ -49,13 +21,12 @@ function ExamList() {
           <div className="recommendExams">
             {recommendExams.map(function (exam) {
               return (
-                <Exams
-                  subject={exam.subject}
-                  length={exam.length}
-                  time={exam.time}
-                  title={exam.title}
-                  date={exam.date}
-                />
+                <Link
+                  key={"recomend-exam" + exam.id}
+                  to={"/student/taking/" + exam.id}
+                >
+                  <Exams exam={exam} />
+                </Link>
               );
             })}
           </div>
@@ -64,20 +35,16 @@ function ExamList() {
           <h2>Tất cả bài thi:</h2>
           <div className="allExams">
             {allExams.map(function (exam) {
+              idRefs.current.push(exam.id);
               return (
-                <Exams
-                  subject={exam.subject}
-                  length={exam.length}
-                  time={exam.time}
-                  title={exam.title}
-                  date={exam.date}
-                />
+                <Link key={"exam" + exam.id} to={"/student/taking/" + exam.id}>
+                  <Exams exam={exam} />
+                </Link>
               );
             })}
           </div>
         </div>
       </div>
-      <Header />
     </div>
   );
 }

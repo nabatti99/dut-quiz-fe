@@ -40,21 +40,17 @@
   height: fit-content;
 }
 
-.tickButton {
-  width: 15px;
-  height: 15px;
-  background-color: white;
-  border: 1px solid#707070;
+input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #315870;
+  border: 2px solid#707070;
   cursor: pointer;
 }
-
-.answer.selected .tickButton {
-  background-color: #65996e;
-}
-
-.multipleChoiceQuiz .tickButton {
-  border-radius: 2px;
-}
-.singleChoiceQuiz .tickButton {
-  border-radius: 50%;
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #315870;
+  border: 2px solid#707070;
+  cursor: pointer;
 }

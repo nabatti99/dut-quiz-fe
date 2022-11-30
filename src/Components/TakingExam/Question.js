@@ -1,44 +1,62 @@
 import "./Question.css";
+import { useState } from "react";
 
 function Question(props) {
   let src = props.src;
 
-  function checkDone() {
+  let [multipleCheck, setMultipleCheck] = useState([]);
+  const checkDoneMultiple = (array) => {
     let theQuestion = document.getElementById(src.id);
-    let _check = src.answers.some((ans, _index) =>
-      document
-        .getElementById(src.id + "." + _index)
-        .classList.contains("selected")
-    );
-    theQuestion.classList.toggle("done", _check === true);
+    let _check = array.length !== 0;
+    theQuestion.classList.toggle("done", _check);
     let node = document.getElementById("node" + src.id);
-
     node.classList.toggle("done", theQuestion.classList.contains("done"));
+  };
+
+  function MultipleCheckHandler(id) {
+    let _check = multipleCheck.includes(id);
+    if (_check) {
+      let after = multipleCheck.filter((item) => item !== id);
+      setMultipleCheck(after);
+      checkDoneMultiple(after);
+    } else {
+      let after = [...multipleCheck, id];
+      setMultipleCheck(after);
+      checkDoneMultiple(after);
+    }
   }
-  // function checkStatus() {
-  //   let node = document.getElementById("node" + question.id);
-  //   let quest = document.getElementById(question.id);
-  //   console.log(node);
-  //   node.classList.toggle("done", quest.classList.contains("done"));
-  // }
+
+  let [singleCheck, setSingleCheck] = useState("");
+  const checkDoneSingle = (id) => {
+    let theQuestion = document.getElementById(src.id);
+    let _check = id !== "";
+    theQuestion.classList.toggle("done", _check);
+    let node = document.getElementById("node" + src.id);
+    node.classList.toggle("done", theQuestion.classList.contains("done"));
+  };
+
+  function SingleCheckHandler(id) {
+    setSingleCheck(id);
+    checkDoneSingle();
+  }
+
   switch (src.type) {
     case "multiple":
       return (
         <div className="multipleChoiceQuiz">
           <div className="theQuestion" id={src.id}>
-            <p>{"Câu " + props.index + ": " + src.question}</p>
+            <p>{"Câu " + props.index + ": " + src.title}</p>
           </div>
           <div className="theAnswers">
             {src.answers.map((ans, index) => {
-              function multipleChoice() {
-                const answer = document.getElementById(src.id + "." + index);
-                answer.classList.toggle("selected");
-                checkDone();
-              }
+              let _id = src.id + "." + index;
               return (
-                <div className="answer" id={src.id + "." + index}>
-                  <div className="tickButton" onClick={multipleChoice}></div>
-                  <div className="ansContent">{ans.content}</div>
+                <div className="answer" id={_id} key={index}>
+                  <input
+                    type="checkbox"
+                    onChange={() => MultipleCheckHandler(_id)}
+                  />{" "}
+                  {ans.content};
                 </div>
               );
             })}
@@ -49,31 +67,19 @@ function Question(props) {
       return (
         <div className="singleChoiceQuiz">
           <div className="theQuestion" id={src.id}>
-            <p>{"Câu " + props.index + ": " + src.question}</p>
+            <p>{"Câu " + props.index + ": " + src.title}</p>
           </div>
           <div className="theAnswers">
             {src.answers.map((ans, index) => {
-              function singleChoice() {
-                src.answers.forEach((_ans, _index) => {
-                  let theAnswers = document.getElementById(
-                    src.id + "." + _index
-                  );
-                  if (
-                    theAnswers.classList.contains("selected") &&
-                    _index !== index
-                  )
-                    theAnswers.classList.toggle("selected");
-                });
-                let selectedAnswer = document.getElementById(
-                  src.id + "." + index
-                );
-                selectedAnswer.classList.toggle("selected");
-                checkDone();
-              }
+              let _id = src.id + "." + index;
               return (
-                <div className="answer" id={src.id + "." + index}>
-                  <div className="tickButton" onClick={singleChoice}></div>
-                  <div className="ansContent">{ans.content}</div>
+                <div className="answer" key={index} id={_id}>
+                  <input
+                    type="radio"
+                    checked={singleCheck === src.id + "." + index}
+                    onChange={() => SingleCheckHandler(_id)}
+                  />
+                  {ans.content}
                 </div>
               );
             })}

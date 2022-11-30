@@ -5,7 +5,9 @@ function GreenButton(props) {
   return (
     <div>
       <Link to={props.link}>
-        <button className="greenButton">{props.value}</button>
+        <button className="greenButton" onClick={props.onClick}>
+          {props.value}
+        </button>
       </Link>
     </div>
   );

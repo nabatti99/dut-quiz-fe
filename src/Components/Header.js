@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 import Avatar from "./Avatar/Avatar.js";
 import "./Header.css";
 function Header() {
   return (
     <div className="header">
-      <div className="logo"></div>
+      <Link to="/student">
+        <div className="logo"></div>
+      </Link>
 
       <span className="title">
         HỆ THỐNG THI TRẮC NGHIỆM TRỰC TUYẾN <br />

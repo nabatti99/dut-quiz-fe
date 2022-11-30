@@ -1,25 +1,51 @@
-import "./login.css";
-import { Routes, Route } from "react-router-dom";
-import LoginPart from "./loginPart";
-
+import "./Login.css";
+import GreenButton from "../Button/GreenButton";
+import RedButton from "../Button/RedButton";
+import { Link } from "react-router-dom";
 function Login() {
   return (
-    <div className="login_page">
-      <div className="login_title">
-        <span id="namepage">HỆ THỐNG THI TRẮC NGHIỆM TRỰC TUYẾN</span>
-        <span id="author">
-          KHOA CÔNG NGHỆ THÔNG TIN - TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐẠI HỌC ĐÀ NẴNG
-        </span>
-      </div>
-      <div className="login_part">
-        <div id="logo"></div>
-        <Routes>
-          <Route path="/">
-            <Route index element={<LoginPart />} />
-            <Route path="/login" element={<LoginPart />} />
-          </Route>
-        </Routes>
-      </div>
+    <div>
+      <form id="login">
+        <div className="_input">
+          <div className="text_input">
+            <input
+              id="username"
+              type="text"
+              className="input_field"
+              placeholder=" "
+            ></input>
+            <label
+              htmlFor="username"
+              id="username_lable"
+              className="input_lable"
+            >
+              Username
+            </label>
+          </div>
+          <div className="text_input">
+            <input
+              id="password"
+              type="password"
+              className="input_field"
+              placeholder=" "
+            ></input>
+            <label
+              htmlFor="password"
+              id="username_lable"
+              className="input_lable"
+            >
+              Password
+            </label>
+          </div>
+        </div>
+        <Link to="reset-password" id="passforget">
+          Quên mật khẩu? Nhấn vào đây
+        </Link>
+        <div className="Loginbutton">
+          <RedButton link="/signUp" value="Đăng ký" />
+          <GreenButton link="/student" value="Đăng nhập" />
+        </div>
+      </form>
     </div>
   );
 }

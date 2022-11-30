@@ -5,7 +5,7 @@
 }
 
 .takingExam {
-  width: 100vw;
+  width: 100%;
   height: 95vh;
   display: flex;
   flex-direction: column;
@@ -25,7 +25,8 @@
   margin-bottom: 10px;
   text-align: center;
   color: #4c4c4c;
-  font-size: 20px;
+  font-size: 25px;
+  margin-bottom: 10px;
 }
 .takingExam .contain .nottitle {
   width: 100%;
@@ -35,6 +36,10 @@
 .nottitle .testContain {
   width: 60%;
   margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
 }
 .testContain .infor {
   width: 90%;
@@ -69,13 +74,16 @@
   right: 20px;
   height: 50%;
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   overflow: auto;
   gap: 10px;
+  border: 1px solid#2e4858;
+  border-radius: 20px;
+  padding: 15px;
 }
 
 .nottitle .testManaging .questionNodes::-webkit-scrollbar {
-  width: 1;
+  width: 0;
 }
 
 .nottitle .testManaging .warning {
@@ -89,6 +97,7 @@
   gap: 10px;
   color: #2e4858;
   font-size: 20px;
+  margin-top: 30px;
 }
 .nottitle .testManaging .warning #faultCount {
   margin-left: 20px;
@@ -106,8 +115,14 @@
   padding: 20px;
   border-radius: 15px;
 }
+
+.testContain .submitBtn {
+  width: 80%;
+  text-align: center;
+}
+
 .testContain .testField {
-  height: 80%;
+  height: 90%;
   width: fit-content;
   display: flex;
   padding: 20px;
@@ -115,7 +130,8 @@
   gap: 30px;
   align-items: center;
   overflow: auto;
-  border: 1px solid #f5ca96;
+  border: 2px solid #ffcd90;
+  border-radius: 20px;
 }
 .testContain .testField::-webkit-scrollbar {
   width: 0;
@@ -156,4 +172,34 @@ Header {
 }
 #bottom {
   bottom: 0;
+}
+#confirm {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #31587058;
+  transition: 0.25;
+}
+#confirm .confirmMessage {
+  position: absolute;
+  width: 500px;
+  height: 300px;
+  top: 20%;
+  left: 30%;
+  background-color: white;
+  padding: 70px;
+  font-size: 25px;
+  font-family: sans-serif;
+  border-radius: 20px;
+  box-shadow: 0px 2px 2px #707070c2;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #344756;
+}
+
+#confirm .confirmMessage .confirmBtn {
+  display: flex;
+  justify-content: flex-end;
 }

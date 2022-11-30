@@ -11,6 +11,7 @@
   box-shadow: inset 0 0 0 #65996e;
   color: #65996e;
   transition: ease-out 0.3s;
+  border: 2px solid #65996e;
 }
 .greenButton:hover {
   cursor: pointer;
@@ -31,6 +32,7 @@
   color: #ff739d;
   cursor: pointer;
   transition: 0.25s ease-in-out;
+  border: 2px solid #ff739d;
 }
 .redButton:hover {
   cursor: pointer;
