@@ -56,7 +56,9 @@ function TakingExam(props) {
                     key={question.id + "node"}
                     onClick={() => {
                       document
-                        .getElementById(set[index === 0 ? index : index - 1].id)
+                        .getElementById(
+                          set.questions[index === 0 ? index : index - 1].id
+                        )
                         .scrollIntoView({
                           behavior: "smooth",
                           block: "start",
@@ -110,7 +112,7 @@ function TakingExam(props) {
           </div>
         </div>
       </div>
-      <Header />
+      <Header type="student" />
       <div id="left"></div>
       <div id="right"></div>
       <div id="top"></div>

@@ -4,19 +4,29 @@
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
-.header {
+.studentHeader,
+.teacherHeader {
   font-size: 16px;
   color: #2e4858;
   width: 100vw;
   height: 90px;
   box-sizing: border-box;
-  border: 10px solid #ecfeff;
   display: flex;
   justify-content: space-between;
   position: fixed;
+}
+
+.studentHeader {
+  border: 10px solid #ecfeff;
   background-color: #ecfeff;
 }
-.header .title {
+.teacherHeader {
+  border: 10px solid #f7cff3;
+  background-color: #f7cff3;
+}
+
+.studentHeader .title,
+.teacherHeader .title {
   /* font-family: SF-Pro-Display-Medium; */
   width: 60%;
   height: 60%;

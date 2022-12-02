@@ -75,7 +75,7 @@
   border-radius: 15%;
 }
 .login_part #login,
-.login_page #signUp {
+#signup {
   display: flex;
   flex-direction: column;
   justify-content: center;

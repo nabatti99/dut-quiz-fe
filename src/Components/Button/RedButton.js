@@ -5,7 +5,7 @@ function RedButton(props) {
   return (
     <div>
       <Link to={props.link}>
-        <button className="redButton" onClick={props.onClick}>
+        <button type={props.type} className="redButton" onClick={props.onClick}>
           {props.value}
         </button>
       </Link>

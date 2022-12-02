@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom";
+import "./Teacher.css";
 import Header from "../Components/Header";
 
-function Student() {
+function Teacher() {
   return (
-    <div className="student">
+    <div className="teacher">
       <Outlet />
-      <Header type="student" />
+      <Header type="teacher" />
     </div>
   );
 }
 
-export default Student;
+export default Teacher;
