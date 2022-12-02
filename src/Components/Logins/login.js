@@ -13,13 +13,14 @@ function Login() {
               type="text"
               className="input_field"
               placeholder=" "
+              required
             ></input>
             <label
               htmlFor="username"
               id="username_lable"
               className="input_lable"
             >
-              Username
+              Tên đăng nhập
             </label>
           </div>
           <div className="text_input">
@@ -28,13 +29,14 @@ function Login() {
               type="password"
               className="input_field"
               placeholder=" "
+              required
             ></input>
             <label
               htmlFor="password"
               id="username_lable"
               className="input_lable"
             >
-              Password
+              Mật khẩu
             </label>
           </div>
         </div>
@@ -43,7 +45,7 @@ function Login() {
         </Link>
         <div className="Loginbutton">
           <RedButton link="/signUp" value="Đăng ký" />
-          <GreenButton link="/student" value="Đăng nhập" />
+          <GreenButton type="submit" value="Đăng nhập" />
         </div>
       </form>
     </div>

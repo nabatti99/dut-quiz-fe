@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import Avatar from "./Avatar/Avatar.js";
 import "./Header.css";
-function Header() {
+function Header(props) {
   return (
-    <div className="header">
+    <div
+      className={props.type === "student" ? "studentHeader" : "teacherHeader"}
+    >
       <Link to="/student">
         <div className="logo"></div>
       </Link>

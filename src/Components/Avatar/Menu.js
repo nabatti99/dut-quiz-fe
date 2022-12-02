@@ -1,8 +1,8 @@
 import "./Avatar.css";
 import MenuItems from "./MenuItems";
-import listOutline from "./menuicon/list-outline.png";
-import result from "./menuicon/checkmark-done-outline.png";
-import calendar from "./menuicon/calendar-outline.png";
+import listOutline from "./menuicon/listofexam.gif";
+import result from "./menuicon/result.gif";
+import logout from "./menuicon/logout.gif";
 
 const menuItems = [
   {
@@ -16,9 +16,9 @@ const menuItems = [
     link: "/student/results",
   },
   {
-    icon: calendar,
-    title: "Lịch trình thi",
-    link: "/student/calendar",
+    icon: logout,
+    title: "Đăng xuất",
+    link: "/",
   },
 ];
 
