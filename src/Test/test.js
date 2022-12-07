@@ -1,5 +1,5 @@
 let questions = [];
-let n = 5;
+let n = 100;
 for (let i = 1; i <= n; i++) {
   let trueAns = Math.random() * 4;
   const quest = {

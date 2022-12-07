@@ -1,3 +1,4 @@
+@import url("../../index.css");
 @font-face {
   font-family: "SF-Pro-Display-Bold";
   font-style: normal;
@@ -70,7 +71,6 @@
 .image {
   width: 70px;
   height: 70px;
-  background-image: url(/public/avatarsample.PNG);
   background-size: contain;
   border-radius: 50%;
   background-repeat: no-repeat;
@@ -100,7 +100,7 @@ Menu .MenuProfile {
 }
 .menuItems {
   display: flex;
-  background-color: #ebfeff;
+  background-color: var(--mainBGColor);
   border-radius: 50px;
 
   width: 210px;
@@ -111,7 +111,7 @@ Menu .MenuProfile {
   cursor: pointer;
 }
 .menuItems:hover {
-  background-color: #b7e1e3;
+  background-color: var(--darkBGColor);
   transition: 0.2s;
   cursor: pointer;
   box-shadow: 0px 2px #2e485850;
@@ -130,6 +130,6 @@ Menu .MenuProfile {
   margin-bottom: 15px;
 }
 a {
-  color: #2e4858;
+  color: var(--darkestColor);
   text-decoration: none;
 }

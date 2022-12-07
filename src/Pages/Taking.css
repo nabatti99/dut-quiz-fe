@@ -1,3 +1,4 @@
+@import url("../index.css");
 * {
   margin: 0;
   padding: 0;
@@ -24,7 +25,7 @@
   margin-top: 20px;
   margin-bottom: 10px;
   text-align: center;
-  color: #4c4c4c;
+  color: var(--darkestColor);
   font-size: 25px;
   margin-bottom: 10px;
 }
@@ -54,7 +55,7 @@
   margin-left: 20px;
   font-size: 30px;
   font-family: sans-serif;
-  color: #eda155;
+  color: var(--warningHighlight);
 }
 
 .testContain .infor #time {
@@ -77,9 +78,9 @@
   grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   overflow: auto;
   gap: 10px;
-  border: 1px solid#2e4858;
+  border: 2px solid var(--darkestColor);
   border-radius: 20px;
-  padding: 15px;
+  padding: 20px;
 }
 
 .nottitle .testManaging .questionNodes::-webkit-scrollbar {
@@ -95,7 +96,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  color: #2e4858;
+  color: var(--darkestColor);
   font-size: 20px;
   margin-top: 30px;
 }
@@ -110,7 +111,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  background-color: #f5ca96;
+  background-color: var(--lightWarningBGColor);
   box-sizing: border-box;
   padding: 20px;
   border-radius: 15px;
@@ -130,7 +131,7 @@
   gap: 30px;
   align-items: center;
   overflow: auto;
-  border: 2px solid #ffcd90;
+  border: 2px solid var(--badHighlight);
   border-radius: 20px;
 }
 .testContain .testField::-webkit-scrollbar {
@@ -145,7 +146,7 @@ Header {
 #bottom,
 #left,
 #right {
-  background: #ffb873;
+  background: var(--warningHighlight);
   position: fixed;
 }
 #left,
@@ -173,14 +174,18 @@ Header {
 #bottom {
   bottom: 0;
 }
-#confirm {
+#confirm,
+#warn,
+#loading {
   position: fixed;
   width: 100%;
   height: 100%;
   background-color: #31587058;
   transition: 0.25;
+  align-items: center;
 }
-#confirm .confirmMessage {
+#confirm .confirmMessage,
+#warn .confirmMessage {
   position: absolute;
   width: 500px;
   height: 300px;
@@ -202,4 +207,12 @@ Header {
 #confirm .confirmMessage .confirmBtn {
   display: flex;
   justify-content: flex-end;
+}
+#loading #loadingIcon {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  top: 45vh;
+  left: 45vw;
+  background-size: cover;
 }

@@ -1,12 +1,14 @@
 import "./Taking.css";
 import Header from "../Components/Header";
 import Question from "../Components/TakingExam/Question";
-import RedButton from "../Components/Button/RedButton";
-import GreenButton from "../Components/Button/GreenButton";
+import BadButton from "../Components/Button/BadButton";
+import WellButton from "../Components/Button/WellButton";
+import WarningButton from "../Components/Button/WarningButton";
 import QuizNode from "../Components/TakingExam/QuizNode";
 import Timer from "../Components/TakingExam/Timer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import allExams from "../Test/test";
+import loadingIcon from "../Components/Avatar/menuicon/loadingIcon.gif";
 
 function TakingExam(props) {
   const warningMessage = [
@@ -17,17 +19,34 @@ function TakingExam(props) {
     "- Có thể click vào ô câu hỏi bên trên để lướt nhanh đến câu hỏi muốn làm",
   ];
   const exam = allExams.find((exam) => exam.id === props.examID);
-  console.log(exam);
   const set = exam.set;
   let countNode = 0;
   let countQuest = 0;
-  let countFault = 0;
+  let countFault = useRef(0);
+
   const [submit, setSubmit] = useState(false);
   const [showSubmit, setShowSubmit] = useState(false);
+  const [showWarning, setShowWarning] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [timeOutSubmit, setTimeOutSubmit] = useState(false);
+
+  function preventBlurWin() {
+    // countFault.current++;
+    // setShowWarning(true);
+  }
+
   useEffect(() => {
-    setInterval(() => {
+    window.addEventListener("blur", preventBlurWin);
+
+    return () => {
+      window.removeEventListener("blur", preventBlurWin);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timerIDNode = setInterval(() => {
       let countDone = 0;
-      set.questions.map((question) => {
+      set.questions.forEach((question) => {
         if (
           document
             .getElementById("node" + question.id)
@@ -38,7 +57,53 @@ function TakingExam(props) {
       if (countDone === countNode) setShowSubmit(true);
       else setShowSubmit(false);
     }, 1000);
+
+    const logo = document.getElementById("logo");
+    const preventLogoClick = (e) => {
+      e.preventDefault();
+    };
+    logo.addEventListener("click", (e) => {
+      preventLogoClick(e);
+    });
+    return () => {
+      clearInterval(timerIDNode);
+      logo.removeEventListener("click", (e) => {
+        preventLogoClick(e);
+      });
+    };
   }, []);
+
+  function TimeOUt(minutesLeft) {
+    if (minutesLeft === 0)
+      setTimeout(() => {
+        setTimeOutSubmit(true);
+        SubmitHandler();
+      }, 1000);
+  }
+  function SubmitHandler() {
+    //mở trang loading
+    setConfirm(true);
+    setShowSubmit(false);
+    setShowWarning(false);
+    setSubmit(false);
+
+    document.getElementById("logo").removeEventListener("click", () => {});
+
+    //Chấm bài
+
+    //Gửi bài lên server
+
+    //xoa duong link lam bai
+
+    //unmounted
+
+    if (timeOutSubmit) {
+      //tra ve trang student
+    } else {
+      //tra ve trang xem diem
+    }
+  }
+
   return (
     <div className="takingExam">
       <div className="contain">
@@ -70,7 +135,7 @@ function TakingExam(props) {
               })}
             </div>
             <div className="warning">
-              <p id="faultCount">{"Số lần vi phạm: " + countFault}</p>
+              <p id="faultCount">{"Số lần vi phạm: " + countFault.current}</p>
               <div id="warningMessage">
                 {warningMessage.map((mess) => {
                   return <p key={warningMessage.indexOf(mess)}>{mess}</p>;
@@ -81,7 +146,11 @@ function TakingExam(props) {
           <div className="testContain">
             <div className="infor">
               <div id="timer">
-                <Timer time={exam.time} />
+                {!confirm ? (
+                  <Timer time={exam.time} timeout={TimeOUt} />
+                ) : (
+                  "00:00:00"
+                )}
               </div>
               <div id="subject">
                 <p>{"Học phần: " + exam.subject}</p>
@@ -103,7 +172,7 @@ function TakingExam(props) {
             </div>
             {showSubmit && (
               <div className="submitBtn">
-                <RedButton
+                <BadButton
                   value="Nộp bài"
                   onClick={() => setSubmit((prev) => !prev)}
                 />
@@ -131,13 +200,49 @@ function TakingExam(props) {
             thấy chưa chắc chắn! Nếu xác nhận sẽ không thể thay đổi kết quả nữa!
           </p>
           <div className="confirmBtn">
-            <RedButton
+            <WarningButton
               value="Chờ chút kiểm tra lại tí!"
               onClick={() => setSubmit((prev) => !prev)}
             />
-            <GreenButton value="Nộp luôn!" />
+            <WellButton value="Nộp luôn!" onClick={SubmitHandler} />
           </div>
         </div>
+      </div>
+
+      <div
+        id="warn"
+        style={
+          !showWarning
+            ? { visibility: "hidden", transition: 0.25 }
+            : { visibility: "visible", transition: 0.25 }
+        }
+      >
+        <div className="confirmMessage">
+          <p>
+            {`Bạn đã vi phạm ${countFault.current} lần, nếu vi phạm thêm ${
+              3 - countFault.current
+            }
+              lần nữa bài thi của bạn sẽ được kết thúc ngay lập tức`}
+          </p>
+          <WarningButton
+            value="Đã hiểu"
+            onClick={() => setShowWarning(false)}
+          />
+        </div>
+      </div>
+
+      <div
+        id="loading"
+        style={
+          !confirm
+            ? { visibility: "hidden", transition: 0.25 }
+            : { visibility: "visible", transition: 0.25 }
+        }
+      >
+        <div
+          id="loadingIcon"
+          style={{ backgroundImage: `url(${loadingIcon})` }}
+        ></div>
       </div>
     </div>
   );

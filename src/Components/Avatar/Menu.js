@@ -39,6 +39,10 @@ function Menu() {
         icon={menuItems[2].icon}
         title={menuItems[2].title}
         link={menuItems[2].link}
+        onClick={() => {
+          localStorage.setItem("token", "");
+          localStorage.setItem("loginInfor", "");
+        }}
       />
     </div>
   );
