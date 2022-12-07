@@ -1,4 +1,4 @@
-import "./Login.css";
+import "./Home.css";
 function ForgotPass() {
   return (
     <div className="forgotPass">

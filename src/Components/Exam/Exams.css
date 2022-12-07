@@ -1,3 +1,4 @@
+@import url("../../index.css");
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +11,7 @@
   height: 80px;
   border-radius: 15px;
   position: relative;
-  color: #2e4858;
+  color: var(--darkestColor);
   box-shadow: 0px 2px 2px #70707063;
   cursor: pointer;
   transition: 0.3s;
@@ -20,7 +21,7 @@
 }
 
 .exambox:hover {
-  background-color: #abe3e4;
+  background-color: var(--darkBGColor);
   height: 100px;
   transition: 0.3s;
 }

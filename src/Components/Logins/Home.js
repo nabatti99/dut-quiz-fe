@@ -1,7 +1,10 @@
-import "./Login.css";
+import "./Home.css";
 import { Outlet } from "react-router-dom";
-
+import loadingIcon from "../Avatar/menuicon/loadingIcon.gif";
+import { useState } from "react";
 function Home() {
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="login_page">
       <div className="login_title">
@@ -12,7 +15,20 @@ function Home() {
       </div>
       <div className="login_part">
         <div id="logo"></div>
-        <Outlet />
+        <Outlet context={[loading, setLoading]} />
+      </div>
+      <div
+        id="loadingLogin"
+        style={
+          !loading
+            ? { visibility: "hidden", transition: 0.25 }
+            : { visibility: "visible", transition: 0.25 }
+        }
+      >
+        <div
+          id="loadingIconLogin"
+          style={{ backgroundImage: `url(${loadingIcon})` }}
+        ></div>
       </div>
     </div>
   );

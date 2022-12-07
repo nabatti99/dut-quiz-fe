@@ -9,7 +9,7 @@ function Exams(props) {
           <span id="subject">{exam.subject}</span>
         </div>
         <div className="right">
-          <span id="length">{exam.set.questions.length + " câu"}</span>
+          <span id="length">{exam.length + " câu"}</span>
           <span id="time">{exam.time + " phút"}</span>
         </div>
       </div>

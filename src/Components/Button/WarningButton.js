@@ -1,13 +1,13 @@
 import "./Button.css";
 import { Link } from "react-router-dom";
 
-function GreenButton(props) {
+function WarningButton(props) {
   return (
     <div>
       <Link to={props.link}>
         <button
           type={props.type}
-          className="greenButton"
+          className="warningButton"
           onClick={props.onClick}
         >
           {props.value}
@@ -16,4 +16,4 @@ function GreenButton(props) {
     </div>
   );
 }
-export default GreenButton;
+export default WarningButton;

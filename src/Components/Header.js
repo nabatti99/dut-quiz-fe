@@ -6,7 +6,7 @@ function Header(props) {
     <div
       className={props.type === "student" ? "studentHeader" : "teacherHeader"}
     >
-      <Link to="/student">
+      <Link to="/student" id="logo">
         <div className="logo"></div>
       </Link>
 

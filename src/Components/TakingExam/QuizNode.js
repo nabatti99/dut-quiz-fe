@@ -12,7 +12,6 @@ function QuizNode(props) {
       <div className="indexNode">
         <p>{props.index}</p>
       </div>
-      <div className="status"></div>
     </button>
   );
 }
