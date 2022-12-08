@@ -37,11 +37,11 @@ function Question(props) {
 
   function SingleCheckHandler(id) {
     setSingleCheck(id);
-    checkDoneSingle();
+    checkDoneSingle(id);
   }
 
   switch (src.type) {
-    case "multiple":
+    case "Multiple":
       return (
         <div className="multipleChoiceQuiz">
           <div className="theQuestion" id={src.id}>
@@ -51,7 +51,7 @@ function Question(props) {
             {src.answers.map((ans, index) => {
               let _id = src.id + "." + index;
               return (
-                <div className="answer" id={_id} key={index}>
+                <div className="answer" id={_id} key={ans.id}>
                   <input
                     type="checkbox"
                     onChange={() => MultipleCheckHandler(_id)}
@@ -63,7 +63,7 @@ function Question(props) {
           </div>
         </div>
       );
-    case "single":
+    case "Single":
       return (
         <div className="singleChoiceQuiz">
           <div className="theQuestion" id={src.id}>
@@ -73,7 +73,7 @@ function Question(props) {
             {src.answers.map((ans, index) => {
               let _id = src.id + "." + index;
               return (
-                <div className="answer" key={index} id={_id}>
+                <div className="answer" key={ans.id} id={_id}>
                   <input
                     type="radio"
                     checked={singleCheck === src.id + "." + index}

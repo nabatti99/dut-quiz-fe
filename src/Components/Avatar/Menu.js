@@ -42,6 +42,7 @@ function Menu() {
         onClick={() => {
           localStorage.setItem("token", "");
           localStorage.setItem("loginInfor", "");
+          localStorage.setItem("scores", "");
         }}
       />
     </div>

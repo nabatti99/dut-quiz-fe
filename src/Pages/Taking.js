@@ -7,10 +7,12 @@ import WarningButton from "../Components/Button/WarningButton";
 import QuizNode from "../Components/TakingExam/QuizNode";
 import Timer from "../Components/TakingExam/Timer";
 import { useEffect, useState, useRef } from "react";
-import allExams from "../Test/test";
+import { useParams } from "react-router-dom";
 import loadingIcon from "../Components/Avatar/menuicon/loadingIcon.gif";
+import APIs from "../Test/APIs";
+import allExams from "../Test/test";
 
-function TakingExam(props) {
+function TakingExam() {
   const warningMessage = [
     "- Chọn đáp án đúng nhất ở các câu hồi trắc nghiệm. Các câu yêu cầu chọn nhiều đáp án, có ô chọn hình vuông thì phải chọn hết tất cả các đáp án đúng mới được tính điểm.",
     "-  Nút nộp bài chỉ hiện khi đã làm hết các câu hỏi.",
@@ -18,8 +20,70 @@ function TakingExam(props) {
     "- Nếu trong quá trình làm bài xảy ra sự cố về mạng. Hãy đăng nhập lại, hệ thống vẫn sự lưu trữ quá trình làm bài.",
     "- Có thể click vào ô câu hỏi bên trên để lướt nhanh đến câu hỏi muốn làm",
   ];
-  const exam = allExams.find((exam) => exam.id === props.examID);
-  const set = exam.set;
+  const params = useParams();
+  const examID = params.examID;
+  const exam = JSON.parse(localStorage.getItem("exams")).find(
+    (exam) => exam.id === examID
+  );
+  const [questions, setQuestion] = useState([]);
+
+  //fetch api lay bo cau hoi
+
+  const getQuestions = () => {
+    console.log("fetching...");
+    const responseOptions = {
+      method: "GET",
+      headers: {
+        ...APIs.getExam.headers,
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+    console.log(responseOptions);
+    fetch(APIs.getExam.link + examID, responseOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("done Fetching");
+        console.log(data);
+        if (data.success === "true") {
+          const dataQuestions = data.exam.questions;
+          let allQuestions = [];
+          dataQuestions.forEach((question) => {
+            let answerArray = [];
+            question.choices.forEach((choice) => {
+              const answer = {
+                state: choice.isTrue,
+                content: choice.choiceTitle,
+                id: choice.id,
+              };
+              answerArray.push(answer);
+            });
+            const studentQuestion = {
+              id: question._id,
+              type: question.type,
+              title: question.questionTitle,
+              answers: answerArray,
+            };
+
+            allQuestions.push(studentQuestion);
+          });
+          return allQuestions;
+        } else return "error";
+      })
+      .then((allquestions) => {
+        console.log(allquestions);
+        setQuestion(allquestions);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
+  // const questions = JSON.parse(localStorage.getItem("examQuestion"));
+
   let countNode = 0;
   let countQuest = 0;
   let countFault = useRef(0);
@@ -46,7 +110,7 @@ function TakingExam(props) {
   useEffect(() => {
     const timerIDNode = setInterval(() => {
       let countDone = 0;
-      set.questions.forEach((question) => {
+      questions.forEach((question) => {
         if (
           document
             .getElementById("node" + question.id)
@@ -113,7 +177,7 @@ function TakingExam(props) {
         <div className="nottitle">
           <div className="testManaging">
             <div className="questionNodes">
-              {set.questions.map((question, index) => {
+              {questions.map((question, index) => {
                 return (
                   <QuizNode
                     src={question}
@@ -122,7 +186,7 @@ function TakingExam(props) {
                     onClick={() => {
                       document
                         .getElementById(
-                          set.questions[index === 0 ? index : index - 1].id
+                          questions[index === 0 ? index : index - 1].id
                         )
                         .scrollIntoView({
                           behavior: "smooth",
@@ -160,7 +224,7 @@ function TakingExam(props) {
               </div>
             </div>
             <div className="testField">
-              {set.questions.map((question) => {
+              {questions.map((question) => {
                 return (
                   <Question
                     src={question}
@@ -181,7 +245,7 @@ function TakingExam(props) {
           </div>
         </div>
       </div>
-      <Header type="student" />
+
       <div id="left"></div>
       <div id="right"></div>
       <div id="top"></div>

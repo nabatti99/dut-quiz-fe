@@ -8,6 +8,20 @@ function ExamList(props) {
   let [exams, setExams] = useState([]);
   let [recommend, setRecommend] = useState([]);
 
+  const getStudentInfor = () => {
+    const studentID = JSON.parse(localStorage.getItem("loginInfor"))._id;
+    const responseOptions = {
+      method: "GET",
+      headers: APIs.getStudentInfor.headers,
+    };
+    fetch(APIs.getStudentInfor.link + studentID, responseOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem("scores", JSON.stringify(data.student.examScore));
+      })
+      .catch((err) => console.log(err));
+  };
+
   const getAllExam = () => {
     let allExams = [];
     const responseOptions = {
@@ -17,8 +31,8 @@ function ExamList(props) {
     fetch(APIs.getAllExams.link, responseOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.success === "true") {
+          const scores = JSON.parse(localStorage.getItem("scores"));
           allExams = [];
           data.exams.forEach((exam) => {
             let date = new Date(exam.startDate);
@@ -40,11 +54,15 @@ function ExamList(props) {
               date: examDate,
               length: exam.numberOfQuestion,
             };
-
-            allExams.push(examElement);
+            if (
+              scores.length === 0 ||
+              scores.find((score) => score.examId === examElement.id) === false
+            )
+              allExams.push(examElement);
           });
 
           setExams((prev) => allExams);
+          localStorage.setItem("exams", JSON.stringify(allExams));
           if (allExams.length >= 2)
             setRecommend((prev) => [allExams[0], allExams[1]]);
           else if (allExams.length === 1) setRecommend(allExams);
@@ -56,20 +74,21 @@ function ExamList(props) {
       });
   };
   useEffect(() => {
+    getStudentInfor();
     getAllExam();
   }, []);
 
   return (
     <div className="examList">
       <div className="contain">
-        <div className="recommend">
+        {/* <div className="recommend">
           <h2>Bài thi đề xuất:</h2>
           <div className="recommendExams">
             {recommend.map(function (exam) {
-              return <Exams key={exam.id} exam={exam} />;
+              return <Exams key={exam.id} exam={exam} link={exam.id} />;
             })}
           </div>
-        </div>
+        </div> */}
         <div className="all">
           <h2>Tất cả bài thi:</h2>
           <div className="allExams">

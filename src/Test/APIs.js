@@ -51,7 +51,18 @@ const APIs = {
   getExam: {
     link: "https://exam-site-api.herokuapp.com/api/v1/exam/", //+examID
     headers: {
-      // Authorization: "Bearer" +token
+      // Authorization: "Bearer " +token
+      "Postman-Token": "<calculated when request is sent>",
+      Host: "<calculated when request is sent>",
+      "User-Agent": "PostmanRuntime/7.29.2",
+      Accept: "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      Connection: "keep-alive",
+    },
+  },
+  getStudentInfor: {
+    link: "https://exam-site-api.herokuapp.com/api/v1/student/", //+studentID
+    headers: {
       "Postman-Token": "<calculated when request is sent>",
       Host: "<calculated when request is sent>",
       "User-Agent": "PostmanRuntime/7.29.2",
