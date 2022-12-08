@@ -1,6 +1,7 @@
 import "./Home.css";
 import WellButton from "../Button/WellButton";
 import BadButton from "../Button/BadButton";
+import WarningButton from "../Button/WarningButton";
 import { Link } from "react-router-dom";
 import { useState, useRef, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
@@ -74,6 +75,7 @@ function Login() {
               fullName: _object.current.studentResult.fullName,
               MSSV: _object.current.studentResult.mssv,
               roles: _object.current.studentResult.roles[0],
+              examsScore: _object.current.s,
             })
           );
           window.location.pathname = "/student";
@@ -178,7 +180,7 @@ function Login() {
           Quên mật khẩu? Nhấn vào đây
         </Link>
         <div className="Loginbutton">
-          <BadButton link="/signUp" value="Đăng ký" />
+          <WarningButton link="/signUp" value="Đăng ký" />
           <WellButton value="Đăng nhập" onClick={SubmitHandler} />
         </div>
       </form>

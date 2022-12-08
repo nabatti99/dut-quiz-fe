@@ -17,10 +17,10 @@
 .quizNode:hover {
   border: 3px solid var(--darkestColor);
 }
-.quizNode.multiple {
+.quizNode.Multiple {
   border-radius: 5px;
 }
-.quizNode.single {
+.quizNode.Single {
   border-radius: 25px;
 }
 .indexNode {

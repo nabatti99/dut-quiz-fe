@@ -4,7 +4,7 @@ for (let i = 1; i <= n; i++) {
   let trueAns = Math.random() * 4;
   const quest = {
     id: "id" + i,
-    type: i % 2 === 0 ? "single" : "multiple",
+    type: i % 2 === 0 ? "Single" : "Multiple",
     title:
       "Đây là câu hỏi số " +
       i +

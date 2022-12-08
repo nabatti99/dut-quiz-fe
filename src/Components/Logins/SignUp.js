@@ -1,6 +1,7 @@
 import "./Home.css";
 import WellButton from "../Button/WellButton";
 import BadButton from "../Button/BadButton";
+import WarningButton from "../Button/WarningButton";
 import { useEffect, useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import APIs from "../../Test/APIs";
@@ -332,7 +333,7 @@ function SignUp() {
         )}
         <div className="Loginbutton">
           <WellButton link="/" value="Đã có tài khoản" />
-          <BadButton value="Đăng ký" onClick={SignUpHandler} />
+          <WarningButton value="Đăng ký" onClick={SignUpHandler} />
         </div>
       </form>
     </div>
