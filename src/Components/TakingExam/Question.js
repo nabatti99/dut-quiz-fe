@@ -34,10 +34,14 @@ function Question(props) {
     let node = document.getElementById("node" + src.id);
     node.classList.toggle("done", theQuestion.classList.contains("done"));
   };
+  const recordedSingle = (ansId, QuesId) => {
+    props.recordAction(ansId, QuesId);
+  };
 
-  function SingleCheckHandler(id) {
-    setSingleCheck(id);
-    checkDoneSingle(id);
+  function SingleCheckHandler(ansId, QuesId) {
+    setSingleCheck(ansId);
+    checkDoneSingle(ansId);
+    recordedSingle(ansId, QuesId);
   }
 
   switch (src.type) {
@@ -49,12 +53,11 @@ function Question(props) {
           </div>
           <div className="theAnswers">
             {src.answers.map((ans, index) => {
-              let _id = src.id + "." + index;
               return (
-                <div className="answer" id={_id} key={ans.id}>
+                <div className="answer" id={ans.id} key={ans.id}>
                   <input
                     type="checkbox"
-                    onChange={() => MultipleCheckHandler(_id)}
+                    onChange={() => MultipleCheckHandler(ans.id)}
                   />{" "}
                   {ans.content};
                 </div>
@@ -71,13 +74,12 @@ function Question(props) {
           </div>
           <div className="theAnswers">
             {src.answers.map((ans, index) => {
-              let _id = src.id + "." + index;
               return (
-                <div className="answer" key={ans.id} id={_id}>
+                <div className="answer" key={ans.id} id={ans.id}>
                   <input
                     type="radio"
-                    checked={singleCheck === src.id + "." + index}
-                    onChange={() => SingleCheckHandler(_id)}
+                    checked={singleCheck === ans.id}
+                    onChange={() => SingleCheckHandler(ans.id, src.id)}
                   />
                   {ans.content}
                 </div>

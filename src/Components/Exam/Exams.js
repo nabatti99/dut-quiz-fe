@@ -4,7 +4,7 @@ import "./Exams.css";
 function Exams(props) {
   const exam = props.exam;
   return (
-    <Link to={"/student/getTest/" + props.link}>
+    <Link to={"/student/getTest/" + exam.id}>
       <div className="exambox">
         <div className="up">
           <div className="left">

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Exams from "../Components/Exam/Exams";
 import APIs from "../Test/APIs";
 import "./ExamList.css";
 
 function ExamList(props) {
   let [exams, setExams] = useState([]);
-  let [recommend, setRecommend] = useState([]);
+  // let [recommend, setRecommend] = useState([]);
 
   const getStudentInfor = () => {
     const studentID = JSON.parse(localStorage.getItem("loginInfor"))._id;
@@ -63,10 +63,10 @@ function ExamList(props) {
 
           setExams((prev) => allExams);
           localStorage.setItem("exams", JSON.stringify(allExams));
-          if (allExams.length >= 2)
-            setRecommend((prev) => [allExams[0], allExams[1]]);
-          else if (allExams.length === 1) setRecommend(allExams);
-          else setRecommend([]);
+          // if (allExams.length >= 2)
+          //   setRecommend((prev) => [allExams[0], allExams[1]]);
+          // else if (allExams.length === 1) setRecommend(allExams);
+          // else setRecommend([]);
         }
       })
       .catch((error) => {

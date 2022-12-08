@@ -71,6 +71,19 @@ const APIs = {
       Connection: "keep-alive",
     },
   },
+  inputExamScore: {
+    link: "https://exam-site-api.herokuapp.com/api/v1/exam/score/",
+    headers: {
+      "Postman-Token": "<calculated when request is sent>",
+      "Content-Type": "application/json",
+      "Content-Length": "<calculated when request is sent>",
+      Host: "<calculated when request is sent>",
+      "User-Agent": "PostmanRuntime/7.29.2",
+      Accept: "*/*",
+      "Accept-Encoding": "gzip, deflate, br",
+      Connection: "keep-alive",
+    },
+  },
 };
 
 export default APIs;

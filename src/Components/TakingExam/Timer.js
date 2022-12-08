@@ -31,8 +31,8 @@ function Timer(props) {
   }, []);
 
   return (
-    <div id={props.id}>
-      <p>
+    <div>
+      <p id={props.id}>
         {(hours < 10 ? "0" + hours : hours) +
           ":" +
           (minutes < 10 ? "0" + minutes : minutes) +

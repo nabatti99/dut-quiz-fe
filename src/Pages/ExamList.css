@@ -48,7 +48,7 @@ Header {
   padding: 10px;
 }
 .examList .contain .all {
-  height: 50%;
+  height: 100%;
 }
 .recommendExams,
 .allExams {
