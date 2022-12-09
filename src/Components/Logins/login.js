@@ -1,11 +1,11 @@
-import './Home.css';
-import WellButton from '../button/WellButton';
-import BadButton from '../button/BadButton';
-import WarningButton from '../button/WarningButton';
-import { Link } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
-import { useOutletContext } from 'react-router-dom';
-import APIs from '../../test/APIs';
+import "./Home.css";
+import WellButton from "../Button/WellButton";
+import BadButton from "../Button/BadButton";
+import WarningButton from "../Button/WarningButton";
+import { Link } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import APIs from "../../Test/APIs";
 
 function Login() {
   const [usernameError, setUsernameError] = useState(false);
@@ -19,7 +19,7 @@ function Login() {
   const errors = APIs.signIN.errors;
 
   const Validating = (obj) => {
-    if (obj.success === 'false') {
+    if (obj.success === "false") {
       switch (obj.message) {
         case errors[0]:
           setError0(true);
@@ -46,11 +46,11 @@ function Login() {
     setError1(false);
     setError2(false);
     setLoading(true);
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
     const responseOptions = {
-      method: 'POST',
+      method: "POST",
       headers: APIs.signIN.headers,
       body: JSON.stringify({
         username: username,
@@ -67,9 +67,9 @@ function Login() {
       })
       .then((validator) => {
         if (validator === 0) {
-          localStorage.setItem('token', _object.current.token);
+          localStorage.setItem("token", _object.current.token);
           localStorage.setItem(
-            'loginInfor',
+            "loginInfor",
             JSON.stringify({
               _id: _object.current.studentResult._id,
               fullName: _object.current.studentResult.fullName,
@@ -78,11 +78,11 @@ function Login() {
               examsScore: _object.current.s,
             })
           );
-          window.location.pathname = '/student';
+          window.location.pathname = "/student";
         }
       })
       .catch((error) => {
-        console.log('ERROR!');
+        console.log("ERROR!");
         console.log(error);
         setLoading(false);
         setError0(true);
@@ -91,7 +91,7 @@ function Login() {
   const blurUsername = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
-      document.getElementById('password').focus();
+      document.getElementById("password").focus();
     }
   };
   const blurPassword = (e) => {
@@ -101,34 +101,34 @@ function Login() {
     }
   };
   useEffect(() => {
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    usernameInput.addEventListener('keydown', (e) => {
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    usernameInput.addEventListener("keydown", (e) => {
       blurUsername(e);
     });
 
-    passwordInput.addEventListener('keydown', (e) => {
+    passwordInput.addEventListener("keydown", (e) => {
       blurPassword(e);
     });
 
-    usernameInput.addEventListener('focus', (e) => {
+    usernameInput.addEventListener("focus", (e) => {
       setUsernameError(false);
     });
-    passwordInput.addEventListener('focus', (e) => {
+    passwordInput.addEventListener("focus", (e) => {
       setPasswordError(false);
     });
 
     return () => {
-      usernameInput.removeEventListener('keydown', (e) => {
+      usernameInput.removeEventListener("keydown", (e) => {
         blurUsername(e);
       });
-      passwordInput.removeEventListener('keydown', (e) => {
+      passwordInput.removeEventListener("keydown", (e) => {
         blurPassword(e);
       });
-      usernameInput.removeEventListener('focus', (e) => {
+      usernameInput.removeEventListener("focus", (e) => {
         setUsernameError(false);
       });
-      passwordInput.removeEventListener('focus', (e) => {
+      passwordInput.removeEventListener("focus", (e) => {
         setPasswordError(false);
       });
     };
@@ -138,7 +138,7 @@ function Login() {
     <div>
       <form id="login">
         <div className="_input">
-          <div className={usernameError ? 'text_input Error' : 'text_input'}>
+          <div className={usernameError ? "text_input Error" : "text_input"}>
             <input
               id="username"
               type="text"
@@ -157,7 +157,7 @@ function Login() {
           {error2 && (
             <p className="errorMessage">Tên đăng nhập không tồn tại</p>
           )}
-          <div className={passwordError ? 'text_input Error' : 'text_input'}>
+          <div className={passwordError ? "text_input Error" : "text_input"}>
             <input
               id="password"
               type="password"

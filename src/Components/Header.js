@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Avatar from "./avatar/Avatar.js";
+import Avatar from "./Avatar/Avatar.js";
 import "./Header.css";
 function Header(props) {
   return (

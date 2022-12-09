@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from "react";
 
 function Timer(props) {
   const [time, setTime] = useState(props.time * 60);
@@ -33,11 +33,11 @@ function Timer(props) {
   return (
     <div>
       <p id={props.id}>
-        {(hours < 10 ? '0' + hours : hours) +
-          ':' +
-          (minutes < 10 ? '0' + minutes : minutes) +
-          ':' +
-          (second < 10 ? '0' + second : second)}
+        {(hours < 10 ? "0" + hours : hours) +
+          ":" +
+          (minutes < 10 ? "0" + minutes : minutes) +
+          ":" +
+          (second < 10 ? "0" + second : second)}
       </p>
     </div>
   );

@@ -1,12 +1,10 @@
 @import "../index.css";
-@import url(./avatar/Avatar.css);
-
+@import url(./Avatar/Avatar.css);
 * {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
-
 .studentHeader,
 .teacherHeader {
   font-size: 16px;
@@ -24,7 +22,6 @@
   border: 10px solid var(--mainBGColor);
   background-color: var(--mainBGColor);
 }
-
 .teacherHeader {
   border: 10px solid #f7cff3;
   background-color: #f7cff3;
@@ -40,12 +37,10 @@
   margin-top: 20px;
   line-height: 25px;
 }
-
 .title::first-line {
   /* font-family: SF-Pro-Display-Bold; */
   font-weight: bold;
 }
-
 .logo {
   width: 70px;
   height: 70px;

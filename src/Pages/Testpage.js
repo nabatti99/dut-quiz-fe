@@ -1,7 +1,7 @@
 import "../index.css";
 import { useState, useEffect, useRef } from "react";
-import APIs from "../test/APIs";
-import ResultAnounce from "../components/takingexam/ResultAnounce";
+import APIs from "../Test/APIs";
+import ResultAnounce from "../Components/TakingExam/ResultAnounce";
 
 function Testpage() {
   //#region  test api exam

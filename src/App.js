@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/logins/Home";
-import ExamList from "./pages/ExamList";
-import Login from "./components/logins/login";
-import ForgotPass from "./components/logins/forgotPass";
-import SignUp from "./components/logins/SignUp";
-import Student from "./pages/Student";
-import Result from "./pages/Result";
-import TakingExam from "./pages/Taking";
-import Teacher from "./pages/Teacher";
-import Testpage from "./pages/Testpage";
+import Home from "./Components/Logins/Home";
+import ExamList from "./Pages/ExamList";
+import Login from "./Components/Logins/Login";
+import ForgotPass from "./Components/Logins/ForgotPass";
+import SignUp from "./Components/Logins/SignUp";
+import Student from "./Pages/Student";
+import Result from "./Pages/Result";
+import TakingExam from "./Pages/Taking";
+import Teacher from "./Pages/Teacher";
+import Testpage from "./Pages/Testpage";
 import { useEffect } from "react";
-import GetTest from "./pages/GetTest";
+import GetTest from "./Pages/GetTest";
 
 function App() {
   useEffect(() => {

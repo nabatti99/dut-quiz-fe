@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Result.css";
-import APIs from "../test/APIs";
-import Score from "../components/scores/Score";
+import APIs from "../Test/APIs";
+import Score from "../Components/Scores/Score";
 
 function Result() {
   const scores = JSON.parse(localStorage.getItem("scores"));
