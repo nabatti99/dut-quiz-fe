@@ -46,7 +46,12 @@
   height: 100%;
   align-items: center;
   margin-top: 20px;
-  font-size: 35px;
+}
+.scoreContain .right ._score,
+._score.good,
+._score.bad {
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .scoreContain .right ._score.good {
