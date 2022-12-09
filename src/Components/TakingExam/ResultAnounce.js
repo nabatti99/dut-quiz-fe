@@ -1,5 +1,5 @@
 import "./ResultAnounce.css";
-import BadButton from "../button/BadButton";
+import BadButton from "../Button/BadButton";
 import { useEffect, useState } from "react";
 function ResultAnounce(props) {
   const _props = props.theProps;

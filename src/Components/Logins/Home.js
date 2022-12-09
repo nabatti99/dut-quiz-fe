@@ -1,7 +1,7 @@
-import './Home.css';
-import { Outlet } from 'react-router-dom';
-import loadingIcon from '../avatar/menuicon/loadingIcon.gif';
-import { useState } from 'react';
+import "./Home.css";
+import { Outlet } from "react-router-dom";
+import loadingIcon from "../Avatar/menuicon/loadingIcon.gif";
+import { useState } from "react";
 function Home() {
   const [loading, setLoading] = useState(false);
 
@@ -21,8 +21,8 @@ function Home() {
         id="loadingLogin"
         style={
           !loading
-            ? { visibility: 'hidden', transition: 0.25 }
-            : { visibility: 'visible', transition: 0.25 }
+            ? { visibility: "hidden", transition: 0.25 }
+            : { visibility: "visible", transition: 0.25 }
         }
       >
         <div

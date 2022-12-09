@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
-import Exams from '../components/exam/Exams';
-import APIs from '../test/APIs';
-import './ExamList.css';
+import Exams from "../Components/Exam/Exams";
+import APIs from "../Test/APIs";
+import "./ExamList.css";
 
 function ExamList(props) {
   let [exams, setExams] = useState([]);
   // let [recommend, setRecommend] = useState([]);
 
   const getStudentInfor = () => {
-    const studentID = JSON.parse(localStorage.getItem('loginInfor'))._id;
+    const studentID = JSON.parse(localStorage.getItem("loginInfor"))._id;
     const responseOptions = {
-      method: 'GET',
+      method: "GET",
       headers: APIs.getStudentInfor.headers,
     };
     fetch(APIs.getStudentInfor.link + studentID, responseOptions)
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem('scores', JSON.stringify(data.student.examScore));
+        localStorage.setItem("scores", JSON.stringify(data.student.examScore));
       })
       .catch((err) => console.log(err));
   };
@@ -25,30 +25,30 @@ function ExamList(props) {
   const getAllExam = () => {
     let allExams = [];
     const responseOptions = {
-      method: 'GET',
+      method: "GET",
       headers: APIs.getAllExams.headers,
     };
     fetch(APIs.getAllExams.link, responseOptions)
       .then((res) => res.json())
       .then((data) => {
-        if (data.success === 'true') {
-          const scores = JSON.parse(localStorage.getItem('scores'));
+        if (data.success === "true") {
+          const scores = JSON.parse(localStorage.getItem("scores"));
           allExams = [];
           data.exams.forEach((exam) => {
             let date = new Date(exam.startDate);
             let examDate =
               date.getHours() +
-              'h' +
+              "h" +
               date.getMinutes() +
-              ' ngày ' +
+              " ngày " +
               date.getDate() +
-              '/' +
+              "/" +
               date.getMonth() +
-              '/' +
+              "/" +
               date.getFullYear();
             let examElement = {
               id: exam._id,
-              subject: 'Ngôn Ngữ Lập trình',
+              subject: "Ngôn Ngữ Lập trình",
               title: exam.title,
               time: exam.duration,
               date: examDate,
@@ -62,7 +62,7 @@ function ExamList(props) {
           });
 
           setExams((prev) => allExams);
-          localStorage.setItem('exams', JSON.stringify(allExams));
+          localStorage.setItem("exams", JSON.stringify(allExams));
           // if (allExams.length >= 2)
           //   setRecommend((prev) => [allExams[0], allExams[1]]);
           // else if (allExams.length === 1) setRecommend(allExams);

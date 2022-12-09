@@ -1,10 +1,10 @@
-import './Home.css';
-import WellButton from '../button/WellButton';
-import BadButton from '../button/BadButton';
-import WarningButton from '../button/WarningButton';
-import { useEffect, useRef, useState } from 'react';
-import { useOutletContext } from 'react-router-dom';
-import APIs from '../../test/APIs';
+import "./Home.css";
+import WellButton from "../Button/WellButton";
+import BadButton from "../Button/BadButton";
+import WarningButton from "../Button/WarningButton";
+import { useEffect, useRef, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import APIs from "../../Test/APIs";
 
 function SignUp() {
   const [studentNameError, setStudentNameError] = useState(false);
@@ -16,58 +16,58 @@ function SignUp() {
   const responseMessage = APIs.signUP.errors;
 
   const [errors, setError] = useState({
-    studentname: '',
-    studentID: '',
-    username: '',
-    studentPassword: '',
-    studentPassConfirm: '',
+    studentname: "",
+    studentID: "",
+    username: "",
+    studentPassword: "",
+    studentPassConfirm: "",
   });
   let resObj = useRef();
 
   //Ham validate:
   const Validating = (inputs) => {
     let validator = 0;
-    if (inputs.studentname === '') {
+    if (inputs.studentname === "") {
       setStudentNameError(true);
       setError((prev) => {
         let newEr = { ...prev };
-        newEr.studentname = 'Vui lòng nhập họ và tên';
+        newEr.studentname = "Vui lòng nhập họ và tên";
         return newEr;
       });
       validator = 1;
     }
-    if (inputs.studentID === '') {
+    if (inputs.studentID === "") {
       setStudentIDError(true);
       setError((prev) => {
         let newEr = { ...prev };
-        newEr.studentID = 'Vui lòng nhập mã số sinh viên';
+        newEr.studentID = "Vui lòng nhập mã số sinh viên";
         return newEr;
       });
       validator = 1;
     }
-    if (inputs.usernameSignUp === '') {
+    if (inputs.usernameSignUp === "") {
       setUsernameError(true);
       setError((prev) => {
         let newEr = { ...prev };
-        newEr.username = 'Vui lòng nhập tên đăng nhập';
+        newEr.username = "Vui lòng nhập tên đăng nhập";
         return newEr;
       });
       validator = 1;
     }
-    if (inputs.passwordSignUp === '') {
+    if (inputs.passwordSignUp === "") {
       setPasswordError(true);
       setError((prev) => {
         let newEr = { ...prev };
-        newEr.studentPassword = 'Vui lòng nhập mật khẩu của bạn';
+        newEr.studentPassword = "Vui lòng nhập mật khẩu của bạn";
         return newEr;
       });
       validator = 1;
     } else {
-      if (inputs.passwordConfirm === '') {
+      if (inputs.passwordConfirm === "") {
         setPasswordError(true);
         setError((prev) => {
           let newEr = { ...prev };
-          newEr.studentPassConfirm = 'Vui lòng xác nhận mật khẩu của bạn';
+          newEr.studentPassConfirm = "Vui lòng xác nhận mật khẩu của bạn";
           return newEr;
         });
         validator = 1;
@@ -76,7 +76,7 @@ function SignUp() {
           setPasswordError(true);
           setError((prev) => {
             let newEr = { ...prev };
-            newEr.studentPassConfirm = 'Xác nhận mật khẩu không đúng';
+            newEr.studentPassConfirm = "Xác nhận mật khẩu không đúng";
             return newEr;
           });
           validator = 1;
@@ -88,13 +88,13 @@ function SignUp() {
   };
 
   const CheckExistence = (obj) => {
-    if (obj.success === 'false') {
+    if (obj.success === "false") {
       if (obj.message === responseMessage[0]) {
         // loi username ton tai
         setUsernameError(true);
         setError((prev) => {
           let newEr = { ...prev };
-          newEr.username = 'Tên đăng nhập này đã tồn tại';
+          newEr.username = "Tên đăng nhập này đã tồn tại";
           return newEr;
         });
         return 1;
@@ -103,7 +103,7 @@ function SignUp() {
         setStudentIDError(true);
         setError((prev) => {
           let newEr = { ...prev };
-          newEr.studentID = 'Mã số sinh viên này đã tồn tại';
+          newEr.studentID = "Mã số sinh viên này đã tồn tại";
           return newEr;
         });
         return 1;
@@ -122,33 +122,33 @@ function SignUp() {
     setSuccess(false);
     setError((prev) => {
       let restore = {
-        studentname: '',
-        studentID: '',
-        username: '',
-        studentPassword: '',
-        studentPassConfirm: '',
+        studentname: "",
+        studentID: "",
+        username: "",
+        studentPassword: "",
+        studentPassConfirm: "",
       };
       return restore;
     });
 
     const inputs = {
-      studentname: document.getElementById('studentname').value,
-      studentID: document.getElementById('studentID').value,
-      usernameSignUp: document.getElementById('usernameSignUp').value,
-      passwordSignUp: document.getElementById('passwordSignUp').value,
-      passwordConfirm: document.getElementById('passwordConfirm').value,
+      studentname: document.getElementById("studentname").value,
+      studentID: document.getElementById("studentID").value,
+      usernameSignUp: document.getElementById("usernameSignUp").value,
+      passwordSignUp: document.getElementById("passwordSignUp").value,
+      passwordConfirm: document.getElementById("passwordConfirm").value,
     };
     if (Validating(inputs) === 0) {
       setLoading(true);
       const responeOptions = {
-        method: 'POST',
+        method: "POST",
         headers: APIs.signUP.headers,
         body: JSON.stringify({
           username: inputs.usernameSignUp,
           password: inputs.passwordSignUp,
           fullName: inputs.studentname,
-          class: 'Student',
-          department: 'CNTT',
+          class: "Student",
+          department: "CNTT",
           mssv: inputs.studentID,
         }),
       };
@@ -173,7 +173,7 @@ function SignUp() {
   const blurInputs = (e, nextID) => {
     if (e.keyCode === 13) {
       e.preventDefault();
-      if (nextID !== '_') {
+      if (nextID !== "_") {
         document.getElementById(nextID).focus();
       } else {
         e.target.blur();
@@ -183,51 +183,51 @@ function SignUp() {
   };
 
   useEffect(() => {
-    const studentname = document.getElementById('studentname');
-    const studentID = document.getElementById('studentID');
-    const usernameSignUp = document.getElementById('usernameSignUp');
-    const passwordSignUp = document.getElementById('passwordSignUp');
-    const passwordConfirm = document.getElementById('passwordConfirm');
+    const studentname = document.getElementById("studentname");
+    const studentID = document.getElementById("studentID");
+    const usernameSignUp = document.getElementById("usernameSignUp");
+    const passwordSignUp = document.getElementById("passwordSignUp");
+    const passwordConfirm = document.getElementById("passwordConfirm");
 
-    studentname.addEventListener('keydown', (e) => {
-      blurInputs(e, 'studentID');
+    studentname.addEventListener("keydown", (e) => {
+      blurInputs(e, "studentID");
     });
 
-    studentID.addEventListener('keydown', (e) => {
-      blurInputs(e, 'usernameSignUp');
+    studentID.addEventListener("keydown", (e) => {
+      blurInputs(e, "usernameSignUp");
     });
 
-    usernameSignUp.addEventListener('keydown', (e) => {
-      blurInputs(e, 'passwordSignUp');
+    usernameSignUp.addEventListener("keydown", (e) => {
+      blurInputs(e, "passwordSignUp");
     });
 
-    passwordSignUp.addEventListener('keydown', (e) => {
-      blurInputs(e, 'passwordConfirm');
+    passwordSignUp.addEventListener("keydown", (e) => {
+      blurInputs(e, "passwordConfirm");
     });
 
-    passwordConfirm.addEventListener('keydown', (e) => {
-      blurInputs(e, '_');
+    passwordConfirm.addEventListener("keydown", (e) => {
+      blurInputs(e, "_");
     });
 
     return () => {
-      studentname.removeEventListener('keydown', (e) => {
-        blurInputs(e, 'studentID');
+      studentname.removeEventListener("keydown", (e) => {
+        blurInputs(e, "studentID");
       });
 
-      studentID.removeEventListener('keydown', (e) => {
-        blurInputs(e, 'usernameSignUp');
+      studentID.removeEventListener("keydown", (e) => {
+        blurInputs(e, "usernameSignUp");
       });
 
-      usernameSignUp.removeEventListener('keydown', (e) => {
-        blurInputs(e, 'passwordSignUp');
+      usernameSignUp.removeEventListener("keydown", (e) => {
+        blurInputs(e, "passwordSignUp");
       });
 
-      passwordSignUp.removeEventListener('keydown', (e) => {
-        blurInputs(e, 'passwordConfirm');
+      passwordSignUp.removeEventListener("keydown", (e) => {
+        blurInputs(e, "passwordConfirm");
       });
 
-      passwordConfirm.removeEventListener('keydown', (e) => {
-        blurInputs(e, '_');
+      passwordConfirm.removeEventListener("keydown", (e) => {
+        blurInputs(e, "_");
       });
     };
   }, []);
@@ -236,7 +236,7 @@ function SignUp() {
     <div className="signup">
       <form id="signup">
         <div className="_input">
-          <div className={studentNameError ? 'text_input Error' : 'text_input'}>
+          <div className={studentNameError ? "text_input Error" : "text_input"}>
             <input
               id="studentname"
               type="text"
@@ -255,7 +255,7 @@ function SignUp() {
           {studentNameError && (
             <p className="errorMessage">{errors.studentname}</p>
           )}
-          <div className={studentIDError ? 'text_input Error' : 'text_input'}>
+          <div className={studentIDError ? "text_input Error" : "text_input"}>
             <input
               id="studentID"
               type="text"
@@ -272,7 +272,7 @@ function SignUp() {
             </label>
           </div>
           {studentIDError && <p className="errorMessage">{errors.studentID}</p>}
-          <div className={usernameError ? 'text_input Error' : 'text_input'}>
+          <div className={usernameError ? "text_input Error" : "text_input"}>
             <input
               id="usernameSignUp"
               type="text"
@@ -289,7 +289,7 @@ function SignUp() {
             </label>
           </div>
           {usernameError && <p className="errorMessage">{errors.username}</p>}
-          <div className={passwordError ? 'text_input Error' : 'text_input'}>
+          <div className={passwordError ? "text_input Error" : "text_input"}>
             <input
               id="passwordSignUp"
               type="password"
@@ -305,10 +305,10 @@ function SignUp() {
               Mật khẩu
             </label>
           </div>
-          {passwordError && errors.studentPassword !== '' && (
+          {passwordError && errors.studentPassword !== "" && (
             <p className="errorMessage">{errors.studentPassword}</p>
           )}
-          <div className={passwordError ? 'text_input Error' : 'text_input'}>
+          <div className={passwordError ? "text_input Error" : "text_input"}>
             <input
               id="passwordConfirm"
               type="password"
@@ -324,7 +324,7 @@ function SignUp() {
               Xác nhận lại mật khẩu
             </label>
           </div>
-          {passwordError && errors.studentPassConfir !== '' && (
+          {passwordError && errors.studentPassConfir !== "" && (
             <p className="errorMessage">{errors.studentPassConfirm}</p>
           )}
         </div>

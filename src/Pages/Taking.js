@@ -1,50 +1,50 @@
-import './Taking.css';
-import Header from '../components/Header';
-import Question from '../components/takingexam/Question';
-import BadButton from '../components/button/BadButton';
-import WellButton from '../components/button/WellButton';
-import WarningButton from '../components/button/WarningButton';
-import QuizNode from '../components/takingexam/QuizNode';
-import Timer from '../components/takingexam/Timer';
-import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import loadingIcon from '../components/avatar/menuicon/loadingIcon.gif';
-import APIs from '../test/APIs';
-import allExams from '../test/test';
-import Countdown from 'react-countdown';
-import ResultAnounce from '../components/takingexam/ResultAnounce';
+import "./Taking.css";
+import Header from "../Components/Header";
+import Question from "../Components/TakingExam/Question";
+import BadButton from "../Components/Button/BadButton";
+import WellButton from "../Components/Button/WellButton";
+import WarningButton from "../Components/Button/WarningButton";
+import QuizNode from "../Components/TakingExam/QuizNode";
+import Timer from "../Components/TakingExam/Timer";
+import { useEffect, useState, useRef } from "react";
+import { useParams } from "react-router-dom";
+import loadingIcon from "../Components/Avatar/menuicon/loadingIcon.gif";
+import APIs from "../Test/APIs";
+import allExams from "../Test/test";
+import Countdown from "react-countdown";
+import ResultAnounce from "../Components/TakingExam/ResultAnounce";
 
 function TakingExam() {
   const warningMessage = [
-    '- Chọn đáp án đúng nhất ở các câu hỏi trắc nghiệm. Các câu yêu cầu chọn nhiều đáp án, có ô chọn hình vuông thì phải chọn hết tất cả các đáp án đúng mới được tính điểm.',
+    "- Chọn đáp án đúng nhất ở các câu hỏi trắc nghiệm. Các câu yêu cầu chọn nhiều đáp án, có ô chọn hình vuông thì phải chọn hết tất cả các đáp án đúng mới được tính điểm.",
 
-    '- Tuyệt đối không được click chuột ra khỏi khu vực làm bài trong quá trình làm bài thi. Nếu vi phạm quá 3 lần, bài thi sẽ dừng lại ngay lập tức.',
-    '- Nếu trong quá trình làm bài xảy ra sự cố về mạng. Hãy đăng nhập lại, hệ thống vẫn sự lưu trữ quá trình làm bài.',
-    '- Có thể click vào ô câu hỏi bên trên để lướt nhanh đến câu hỏi muốn làm',
+    "- Tuyệt đối không được click chuột ra khỏi khu vực làm bài trong quá trình làm bài thi. Nếu vi phạm quá 3 lần, bài thi sẽ dừng lại ngay lập tức.",
+    "- Nếu trong quá trình làm bài xảy ra sự cố về mạng. Hãy đăng nhập lại, hệ thống vẫn sự lưu trữ quá trình làm bài.",
+    "- Có thể click vào ô câu hỏi bên trên để lướt nhanh đến câu hỏi muốn làm",
   ];
   const params = useParams();
   const examID = params.examID;
-  const exam = JSON.parse(localStorage.getItem('exams')).find(
+  const exam = JSON.parse(localStorage.getItem("exams")).find(
     (exam) => exam.id === examID
   );
   const [questions, setQuestion] = useState([]);
 
   //fetch api lay bo cau hoi
   const getQuestions = () => {
-    console.log('fetching...');
+    console.log("fetching...");
     const responseOptions = {
-      method: 'GET',
+      method: "GET",
       headers: {
         ...APIs.getExam.headers,
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     };
 
     fetch(APIs.getExam.link + examID, responseOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log('done Fetching');
-        if (data.success === 'true') {
+        console.log("done Fetching");
+        if (data.success === "true") {
           const dataQuestions = data.exam.questions;
           let allQuestions = [];
           dataQuestions.forEach((question) => {
@@ -67,9 +67,9 @@ function TakingExam() {
 
             allQuestions.push(studentQuestion);
           });
-          localStorage.setItem('questions', JSON.stringify(allQuestions));
+          localStorage.setItem("questions", JSON.stringify(allQuestions));
           return allQuestions;
-        } else return 'error';
+        } else return "error";
       })
       .then((allquestions) => {
         setQuestion(allquestions);
@@ -97,7 +97,7 @@ function TakingExam() {
   // const [allDone, setAllDone] = useState(false);
   const [resultAn, setResultAn] = useState(false);
   const [rsProps, serRsProps] = useState({
-    title: '',
+    title: "",
     score: 0,
     timeTaken: 0,
   });
@@ -108,30 +108,30 @@ function TakingExam() {
   }
 
   useEffect(() => {
-    window.addEventListener('blur', preventBlurWin);
+    window.addEventListener("blur", preventBlurWin);
 
     return () => {
-      window.removeEventListener('blur', preventBlurWin);
+      window.removeEventListener("blur", preventBlurWin);
     };
   }, []);
 
   useEffect(() => {
-    const logo = document.getElementById('logo');
+    const logo = document.getElementById("logo");
     const preventLogoClick = (e) => {
       e.preventDefault();
     };
-    logo.addEventListener('click', (e) => {
+    logo.addEventListener("click", (e) => {
       preventLogoClick(e);
     });
     return () => {
-      logo.removeEventListener('click', (e) => {
+      logo.removeEventListener("click", (e) => {
         preventLogoClick(e);
       });
     };
   }, []);
 
   function TimeOUt(minutesLeft) {
-    localStorage.setItem('minutesLeft', minutesLeft);
+    localStorage.setItem("minutesLeft", minutesLeft);
     if (minutesLeft === 0 && confirm === false) {
       SubmitHandler();
     }
@@ -159,16 +159,16 @@ function TakingExam() {
     setConfirm(true);
     setShowWarning(false);
     setSubmit(false);
-    const mnLeft = JSON.parse(localStorage.getItem('minutesLeft')) / 60;
+    const mnLeft = JSON.parse(localStorage.getItem("minutesLeft")) / 60;
 
-    document.getElementById('logo').removeEventListener('click', () => {});
+    document.getElementById("logo").removeEventListener("click", () => {});
 
     //
 
     //Chấm bài.
 
     const answerPoint = 10 / countNode;
-    const questionSet = JSON.parse(localStorage.getItem('questions'));
+    const questionSet = JSON.parse(localStorage.getItem("questions"));
     let _score = 0;
 
     submission.current.forEach((_record) => {
@@ -179,16 +179,16 @@ function TakingExam() {
         (answer) => answer.id === _record.ansId
       );
       if (theAnswer.state === true) _score += answerPoint;
-      console.log('questions: ' + theQuestion.id + ' ' + theAnswer.state);
+      console.log("questions: " + theQuestion.id + " " + theAnswer.state);
     });
 
     //Gửi bài lên server
 
     const inputRsOptions = {
-      method: 'POST',
+      method: "POST",
       headers: {
         ...APIs.inputExamScore.headers,
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify({
         examId: exam.id,
@@ -199,15 +199,15 @@ function TakingExam() {
     fetch(APIs.inputExamScore.link, inputRsOptions)
       .then((rs) => rs.json())
       .then((data) => {
-        if (data.success === 'true') {
-          console.log('success');
+        if (data.success === "true") {
+          console.log("success");
           //xoa exams và questions trong localstorage
-          localStorage.setItem('exams', '');
-          localStorage.setItem('questions', '');
+          localStorage.setItem("exams", "");
+          localStorage.setItem("questions", "");
           ///chuyen trang
           if (mnLeft === 0) {
             //tra ve trang home
-            window.location.pathname = '/student';
+            window.location.pathname = "/student";
           } else {
             //tra ve trang xem diem
             // const rsprops = {
@@ -217,7 +217,7 @@ function TakingExam() {
             // };
             // serRsProps(rsprops);
             // setResultAn(true);
-            window.location.pathname = '/student/results';
+            window.location.pathname = "/student/results";
           }
         } else {
           setConfirm(false);
@@ -241,16 +241,16 @@ function TakingExam() {
                     <QuizNode
                       src={question}
                       index={++countNode}
-                      key={question.id + 'node'}
+                      key={question.id + "node"}
                       onClick={() => {
                         document
                           .getElementById(
                             questions[index === 0 ? index : index - 1].id
                           )
                           .scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start',
-                            inline: 'nearest',
+                            behavior: "smooth",
+                            block: "start",
+                            inline: "nearest",
                           });
                       }}
                     />
@@ -258,7 +258,7 @@ function TakingExam() {
                 })}
               </div>
               <div className="warning">
-                <p id="faultCount">{'Số lần vi phạm: ' + countFault.current}</p>
+                <p id="faultCount">{"Số lần vi phạm: " + countFault.current}</p>
                 <div id="warningMessage">
                   {warningMessage.map((mess) => {
                     return <p key={warningMessage.indexOf(mess)}>{mess}</p>;
@@ -272,14 +272,14 @@ function TakingExam() {
                   {!confirm ? (
                     <Timer time={exam.time} timeout={TimeOUt} />
                   ) : (
-                    '00:00:00'
+                    "00:00:00"
                   )}
                 </div>
                 <div id="subject">
-                  <p>{'Học phần: ' + exam.subject}</p>
+                  <p>{"Học phần: " + exam.subject}</p>
                 </div>
                 <div id="time">
-                  <p>{'Thời gian: ' + exam.time + ' phút'}</p>
+                  <p>{"Thời gian: " + exam.time + " phút"}</p>
                 </div>
               </div>
               <div className="testField">
@@ -313,8 +313,8 @@ function TakingExam() {
           id="confirm"
           style={
             !submit
-              ? { visibility: 'hidden', transition: 0.25 }
-              : { visibility: 'visible', transition: 0.25 }
+              ? { visibility: "hidden", transition: 0.25 }
+              : { visibility: "visible", transition: 0.25 }
           }
         >
           <div className="confirmMessage">
@@ -337,8 +337,8 @@ function TakingExam() {
           id="warn"
           style={
             !showWarning
-              ? { visibility: 'hidden', transition: 0.25 }
-              : { visibility: 'visible', transition: 0.25 }
+              ? { visibility: "hidden", transition: 0.25 }
+              : { visibility: "visible", transition: 0.25 }
           }
         >
           <div className="confirmMessage">
@@ -359,8 +359,8 @@ function TakingExam() {
           id="loading"
           style={
             !confirm
-              ? { visibility: 'hidden', transition: 0.25 }
-              : { visibility: 'visible', transition: 0.25 }
+              ? { visibility: "hidden", transition: 0.25 }
+              : { visibility: "visible", transition: 0.25 }
           }
         >
           <div
