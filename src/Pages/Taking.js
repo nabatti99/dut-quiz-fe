@@ -16,7 +16,7 @@ import ResultAnounce from "../Components/TakingExam/ResultAnounce";
 
 function TakingExam() {
   const warningMessage = [
-    "- Chọn đáp án đúng nhất ở các câu hồi trắc nghiệm. Các câu yêu cầu chọn nhiều đáp án, có ô chọn hình vuông thì phải chọn hết tất cả các đáp án đúng mới được tính điểm.",
+    "- Chọn đáp án đúng nhất ở các câu hỏi trắc nghiệm. Các câu yêu cầu chọn nhiều đáp án, có ô chọn hình vuông thì phải chọn hết tất cả các đáp án đúng mới được tính điểm.",
 
     "- Tuyệt đối không được click chuột ra khỏi khu vực làm bài trong quá trình làm bài thi. Nếu vi phạm quá 3 lần, bài thi sẽ dừng lại ngay lập tức.",
     "- Nếu trong quá trình làm bài xảy ra sự cố về mạng. Hãy đăng nhập lại, hệ thống vẫn sự lưu trữ quá trình làm bài.",
@@ -103,8 +103,8 @@ function TakingExam() {
   });
 
   function preventBlurWin() {
-    // countFault.current++;
-    // setShowWarning(true);
+    countFault.current++;
+    setShowWarning(true);
   }
 
   useEffect(() => {
@@ -178,8 +178,8 @@ function TakingExam() {
       const theAnswer = theQuestion.answers.find(
         (answer) => answer.id === _record.ansId
       );
-      if (theAnswer.state === "true");
-      _score += answerPoint;
+      if (theAnswer.state === true) _score += answerPoint;
+      console.log("questions: " + theQuestion.id + " " + theAnswer.state);
     });
 
     //Gửi bài lên server
@@ -190,12 +190,12 @@ function TakingExam() {
         ...APIs.inputExamScore.headers,
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
-      body: {
+      body: JSON.stringify({
         examId: exam.id,
-        score: _score,
-      },
+        score: _score.toFixed(2),
+      }),
     };
-
+    console.log(inputRsOptions);
     fetch(APIs.inputExamScore.link, inputRsOptions)
       .then((rs) => rs.json())
       .then((data) => {
@@ -210,16 +210,17 @@ function TakingExam() {
             window.location.pathname = "/student";
           } else {
             //tra ve trang xem diem
-            const rsprops = {
-              title: exam.title,
-              score: Math.round(_score * 100) / 100,
-              timeTaken: exam.time - mnLeft,
-            };
-
-            serRsProps(rsprops);
-            setResultAn(true);
+            // const rsprops = {
+            //   title: exam.title,
+            //   score: _score.toFixed(2),
+            //   timeTaken: exam.time - mnLeft,
+            // };
+            // serRsProps(rsprops);
+            // setResultAn(true);
+            window.location.pathname = "/student/results";
           }
         } else {
+          setConfirm(false);
           console.log(data.message);
         }
       });
@@ -370,7 +371,11 @@ function TakingExam() {
       </div>
     );
   } else {
-    return <ResultAnounce theProps={rsProps} />;
+    return (
+      <div>
+        <ResultAnounce theProps={rsProps} />
+      </div>
+    );
   }
 }
 

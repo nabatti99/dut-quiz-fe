@@ -33,8 +33,9 @@
 }
 
 .quizNode.done {
-  background-color: var(--darkBGColor);
+  background-color: var(--darkestColor);
 }
 .quizNode.done .indexNode {
   font-weight: bold;
+  color: var(--mainBGColor);
 }
